@@ -1,29 +1,32 @@
 from pages.base_page import BasePage
 import allure
-from selenium.webdriver.support import expected_conditions as EC
 from locators.constructor_locator import ConstructorLocators
 
 
 class ConstructorPage(BasePage):
-
+    @allure.step("Клик по кнопке конструктор")
     def click_constructor(self):
         self.click_elem(ConstructorLocators.CONSTRUCTOR_BTN)
 
+    @allure.step("Клик по кнопке заказ")
     def click_tape_orders(self):
         self.click_elem(ConstructorLocators.ORDERS_TAPE_BTN)
 
+    @allure.step("Клик по кнопке ингра")
     def click_to_bun(self):
         self.find_element(ConstructorLocators.BUNS).click()
 
+    @allure.step("Клик по кнопке заказать")
     def click_create_order(self):
         self.click_elem(ConstructorLocators.CREATE_ORDER_BTN)
         assert self.return_text(ConstructorLocators.ORDER_STATUS) == 'Ваш заказ начали готовить'
 
+    @allure.step("Добавление булки и создание заказа")
     def create_order(self):
         self.add_ingredient()
         self.click_create_order()
 
-    @allure.step("Закрываем модальное окно")
+    @allure.step("Закрытие окна заказа")
     def close_modal_window(self):
         self.click_elem(ConstructorLocators.CLOSE_MODAL_BTN)
 
@@ -44,6 +47,7 @@ class ConstructorPage(BasePage):
         self.close_modal_window()
         assert self.find_element(ConstructorLocators.DESCRIPTION_TITLE, condition=EC.invisibility_of_element)
 
+    @allure.step("Закрываем модальное окно")
     def assert_redirect_nav_tab(self, url, elem):
         match elem:
             case 'Конструктор':

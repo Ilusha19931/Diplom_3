@@ -10,23 +10,28 @@ class OrdersFeedPage(BasePage):
     initial_count_all_times = ''
     initial_count_today = ''
 
+    @allure.step("Клик по первому заказу")
     def open_first_order(self):
         self.find_element(OrdersFeedLocators.FIRST_ORDER_ID).click()
 
+    @allure.step("ИД заказа")
     def return_order_id(self):
         self.waiting_change_value(ConstructorLocators.ORDER_ID, '9999')
         self.id = self.return_text(ConstructorLocators.ORDER_ID)
         return self.id
 
+    @allure.step("ИД заказа в работе")
     def return_order_in_work(self):
         self.waiting_change_value(OrdersFeedLocators.ORDER_IN_WORKS, 'Все текущие заказы готовы!', 30)
         order_id = self.return_text(OrdersFeedLocators.ORDER_IN_WORKS)
         return order_id
 
+    @allure.step("Заказы за сегодня вывод")
     def return_current_count_today(self):
         self.initial_count_today = self.return_text(OrdersFeedLocators.COUNT_TODAY)
         return self.initial_count_today
 
+    @allure.step("Заказы за все время")
     def return_current_count_all_time(self):
         self.initial_count_all_times = self.return_text(OrdersFeedLocators.COUNT_ALL_TIMES)
         return self.initial_count_all_times
