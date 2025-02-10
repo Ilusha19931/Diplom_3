@@ -79,3 +79,7 @@ class BasePage:
             source.dispatchEvent(dragEndEvent);
         """
         self.driver.execute_script(script, source_element, target_element)
+
+    @allure.step("Прокрутка к последнему элементу списка")
+    def scroll_to_bottom_of_list(self, scrollable_list):
+        self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight;", scrollable_list)

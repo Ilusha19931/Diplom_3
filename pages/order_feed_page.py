@@ -1,8 +1,7 @@
 from locators.order_feed_locator import OrdersFeedLocators
 from pages.base_page import BasePage
 import allure
-from locators.constructor_locator import ConstructorLocators
-from locators.private_account_locator import PrivateAccountLocators
+
 
 class OrdersFeedPage(BasePage):
 
@@ -16,8 +15,8 @@ class OrdersFeedPage(BasePage):
 
     @allure.step("ИД заказа")
     def return_order_id(self):
-        self.waiting_change_value(ConstructorLocators.ORDER_ID, '9999')
-        self.id = self.return_text(ConstructorLocators.ORDER_ID)
+        self.waiting_change_value(OrdersFeedLocators.ORDER_ID, '9999')
+        self.id = self.return_text(OrdersFeedLocators.ORDER_ID)
         return self.id
 
     @allure.step("ИД заказа в работе")
@@ -44,7 +43,7 @@ class OrdersFeedPage(BasePage):
     @allure.step("Cозданный заказ появился в истории заказов")
     def assert_created_order_has_in_order_history(self):
         last_order_id = ''
-        list_elem = self.find_elements(PrivateAccountLocators.ORDERS_ID_IN_HISTORY)
+        list_elem = self.find_elements(OrdersFeedLocators.ORDERS_ID_IN_HISTORY)
         if list_elem:
             last_order_id = list_elem[-1].text
             return last_order_id

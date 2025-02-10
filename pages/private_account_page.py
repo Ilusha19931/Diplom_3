@@ -30,7 +30,7 @@ class PryvateAccountPage(BasePage):
     @allure.step("Переход к последнему элементу списка заказов")
     def scroll_to_last_order(self):
         scrollable_lst = self.find_element(PrivateAccountLocators.ORDER_LIST)
-        self.driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight;", scrollable_lst)
+        self.scroll_to_bottom_of_list(scrollable_lst)
 
     @allure.step("Список заказов не пустой")
     def assert_found_lst_is_not_empty(self):
